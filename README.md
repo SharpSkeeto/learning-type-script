@@ -6,7 +6,7 @@ Commands shown using a powershell terminal
 Install Node.js
 Install latest stable release
 If already installed, check version
-Node version should be > 18 at the time of this file creation
+Node version should be > 18 at the time of this file creation  
 Run command: `node --version`
   
   
