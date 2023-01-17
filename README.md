@@ -1,8 +1,8 @@
-# Learning TypeScript
+# Learning TypeScript from scratch
   
   
 Commands shown using a powershell terminal
-
+---
 Install Node.js  
 Install latest stable release  
 If already installed, check version  
