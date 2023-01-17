@@ -109,15 +109,97 @@ let anyThing: any;
 anyThing = "Anything is acceptable!";
 console.log(anyThing);
 anyThing = 1001; // even a number
-console.log(`Yes, anything is accepable: ${anyThing}`);
+console.log(`Yes, anything is acceptable: ${anyThing}`);
+
+
+/***** unknown *****/
+// This is similar to the 'any' type, but is safer because it’s not legal to do anything with an unknown value
+interface IUnKnownUser {
+    name: string;
+}
+class UnKnownUser implements IUnKnownUser {
+    name: string = 'John';
+}
+interface INotUnKnownUser {
+    notName: string;
+}
+class NotUnKnownUser implements INotUnKnownUser {
+    notName: string = 'Not John';
+}
+
+// Simulate API call with above dummy models
+let instanceOfUnKnownUser = new UnKnownUser();
+let unknownUserString = JSON.stringify(instanceOfUnKnownUser);
+let instanceOfNotUnKnownUser = new NotUnKnownUser();
+let notUnknownUserString = JSON.stringify(instanceOfNotUnKnownUser);
+
+const parsedUnKnownUserJSON: unknown = safeParse(unknownUserString);
+const parsedNotUnKnownUserJSON: unknown = safeParse(notUnknownUserString);
+let isUnKnownUserType = IsUserTypeUnKnownUser(parsedUnKnownUserJSON);
+
+console.log('UnKnownUser parsed JSON:');
+console.log(parsedUnKnownUserJSON);
+console.log('NotUnKnownUser parsed JSON:');
+console.log(parsedNotUnKnownUserJSON);
+
+checkUnKnownType(parsedUnKnownUserJSON);
+checkUnKnownType(parsedNotUnKnownUserJSON);
+
+function checkUnKnownType(someJSON: unknown) {
+    if (IsUserTypeUnKnownUser(someJSON)) {
+        // can see properties of the 'unknown' type
+        console.log('Is type of UnKnownUser: true');
+        console.log(`UnKnownUser is: ${someJSON.name}`);
+    } else {
+        console.log('Is type of UnKnownUser: false');
+    }
+}
+
+// Make sure to return booelean based on object type
+function IsUserTypeUnKnownUser(object: unknown): object is IUnKnownUser {
+    if (object !== null && typeof object === 'object') {
+        // can cast if needed for value checking
+        // let localName = (object as IUnKnownUser).name;
+        return "name" in object;
+    }
+    return false;
+}
+
+function safeParse(s: string): unknown {
+    return JSON.parse(s);
+}
 
 
 /***** void *****/
+// void represents the return value of functions which don’t return a value.
+// The inferred return type is void
+function noop() {
+    return;
+}
+
+// In TypeScript void is not the same as undefined
+// When a literal function definition has a void return type, that function must not return anything.
+function f2(): void {
+    // @ts-expect-error
+    return true;
+}
 
 
 /***** never *****/
+// Represents values which are never observed.
+function IHaveFailed(failedMessage: string): never {
+    throw new Error(failedMessage);
+}
 
-
+function fn(x: string | number): void {
+    if (typeof x === "string") {
+        // do something
+    } else if (typeof x === "number") {
+        // do something else
+    } else {
+        x; // has type 'never'!
+    }
+}
 
 console.log();
 

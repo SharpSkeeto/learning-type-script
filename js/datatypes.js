@@ -59,5 +59,65 @@ let anyThing;
 anyThing = "Anything is acceptable!";
 console.log(anyThing);
 anyThing = 1001;
-console.log(`Yes, anything is accepable: ${anyThing}`);
+console.log(`Yes, anything is acceptable: ${anyThing}`);
+class UnKnownUser {
+    constructor() {
+        this.name = 'John';
+    }
+}
+class NotUnKnownUser {
+    constructor() {
+        this.notName = 'Not John';
+    }
+}
+let instanceOfUnKnownUser = new UnKnownUser();
+let unknownUserString = JSON.stringify(instanceOfUnKnownUser);
+let instanceOfNotUnKnownUser = new NotUnKnownUser();
+let notUnknownUserString = JSON.stringify(instanceOfNotUnKnownUser);
+const parsedUnKnownUserJSON = safeParse(unknownUserString);
+const parsedNotUnKnownUserJSON = safeParse(notUnknownUserString);
+let isUnKnownUserType = IsUserTypeUnKnownUser(parsedUnKnownUserJSON);
+console.log('UnKnownUser parsed JSON:');
+console.log(parsedUnKnownUserJSON);
+console.log('NotUnKnownUser parsed JSON:');
+console.log(parsedNotUnKnownUserJSON);
+checkUnKnownType(parsedUnKnownUserJSON);
+checkUnKnownType(parsedNotUnKnownUserJSON);
+function checkUnKnownType(someJSON) {
+    if (IsUserTypeUnKnownUser(someJSON)) {
+        console.log('Is type of UnKnownUser: true');
+        console.log(`UnKnownUser is: ${someJSON.name}`);
+    }
+    else {
+        console.log('Is type of UnKnownUser: false');
+    }
+}
+console.log('?');
+function IsUserTypeUnKnownUser(object) {
+    if (object !== null && typeof object === 'object') {
+        return "name" in object;
+    }
+    return false;
+}
+function safeParse(s) {
+    return JSON.parse(s);
+}
+function noop() {
+    return;
+}
+function f2() {
+    return true;
+}
+function IHaveFailed(failedMessage) {
+    throw new Error(failedMessage);
+}
+function fn(x) {
+    if (typeof x === "string") {
+    }
+    else if (typeof x === "number") {
+    }
+    else {
+        x;
+    }
+}
 console.log();
