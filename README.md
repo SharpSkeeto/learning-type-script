@@ -1,7 +1,7 @@
 ## Learning TypeScript from scratch
   
   
-###Commands shown using a powershell terminal
+### Commands shown using a powershell terminal
 ---
 Install the latest stable release of [Node.js](https://nodejs.org/en/download/)
 If already installed, check the version by running command:  `node --version`
