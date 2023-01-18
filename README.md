@@ -1,22 +1,20 @@
-# Learning TypeScript from scratch
+## Learning TypeScript from scratch
   
   
-Commands shown using a powershell terminal
+###Commands shown using a powershell terminal
 ---
-Install Node.js  
-Install latest stable release  
-If already installed, check version  
+Install the latest stable release of [Node.js](https://nodejs.org/en/download/)
+If already installed, check the version by running command:  `node --version`
 Node version should be > 18 at the time of this file creation  
-Run command: `node --version`
   
   
 Create folder structure for project  
-Example: `/Angular/LearningTypeScript`  
+Example: `/LearningThings/LearningTypeScript`  
   
   
 Create a package file in project folder (package.json)  
-This will create a package.json file, can use defaults for now  
 Run command: `npm init`  
+This will create a package.json file, can use defaults for now  
   
   
 Install TypeScript locally: `npm i typescript --save-dev`  
@@ -26,18 +24,21 @@ Check version globally: `tsc -v`
   
   
 Create a TypeScript config file (tsconfig.json)  
-This will create a tsconfig.json file, can use defaults for now  
-Can change target as needed in the tsconfig.json file  
 Run command: `npx tsc --init`  
+This will create a tsconfig.json file  
+Can use defaults for now, but can change JavaScript version and other properties.  
   
   
-Create a TypeScript file, Ex. testtypescript.ts  
-Add basic JavaScript code as a test script, Ex. let fakeString = 'Fake String';  
+Create a TypeScript file, Ex. TestTypeScript.ts  
+Add some basic JavaScript code as a test script  
+Example: let fakeString = 'Fake String';  console.log(fakeString);
   
   
-Compile code which will generate a testtypescript.js file  
+Compile the script which will generate a TestTypeScript.js JavaScript file  
 Run command: `npx tsc`  
   
   
-Run testtypescript.js file:  
+Run TestTypeScript.js file    
 Run command: `node testtypescript`  
+  
+  
