@@ -92,7 +92,6 @@ function checkUnKnownType(someJSON) {
         console.log('Is type of UnKnownUser: false');
     }
 }
-console.log('?');
 function IsUserTypeUnKnownUser(object) {
     if (object !== null && typeof object === 'object') {
         return "name" in object;
