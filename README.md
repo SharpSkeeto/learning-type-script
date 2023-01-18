@@ -26,12 +26,12 @@ Check version globally: `tsc -v`
 Create a TypeScript config file (tsconfig.json)  
 Run command: `npx tsc --init`  
 This will create a tsconfig.json file  
-Can use defaults for now, but can change JavaScript version and other properties.  
+Use defaults for now, but can change JavaScript target version and other configurations.  
   
   
 Create a TypeScript file, Ex. TestTypeScript.ts  
 Add some basic JavaScript code as a test script  
-Example: let fakeString = 'Fake String';  console.log(fakeString);
+Example: `let fakeString = 'Fake String';  console.log(fakeString);`  
   
   
 Compile the script which will generate a TestTypeScript.js JavaScript file  
