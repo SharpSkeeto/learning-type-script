@@ -62,6 +62,7 @@ console.log(`The average number value of the array is: ${averageNumber}`);
 
 /***** enums *****/
 // When using the keyword 'const', this will remove the generated (function()) code from the JavaScript file.
+// but aboid using number based enums, see below
 const enum FileExtensions {
     cs,
     js,
@@ -75,6 +76,28 @@ let defaultExtension: FileExtensions = FileExtensions.ts;
 console.log(`Enum value (ts): ${defaultExtension}`);
 let newExtensionValue = FileExtensions.js;
 console.log(`Enum value (js): ${newExtensionValue}`);
+
+
+
+/**** another way to handle enum type, non-number based *****/
+// types
+type FileExtensions2 = "cs" | "js" | "ts" | "xml" | "json";
+//or string based
+enum FileExtensions3 {
+    cs = "cs",
+    js = "js",
+    ts = "ts",
+    xml = "xml",
+    json = "json"
+}
+
+const checkFileExtension = (extensions: FileExtensions) => { };
+const checkFileExtension2 = (extensions: FileExtensions2) => { };
+const checkFileExtension3 = (extensions: FileExtensions3) => {};
+
+checkFileExtension(FileExtensions.ts);
+checkFileExtension2("cs");
+checkFileExtension3(FileExtensions3.json);
 
 
 /***** tuples *****/
