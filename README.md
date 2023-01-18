@@ -3,7 +3,7 @@
   
 ### Commands shown using a powershell terminal
 ---
-Install the latest stable release of [Node.js](https://nodejs.org/en/download/)
+Install the latest stable release of [Node.js](https://nodejs.org/en/download/)  
 If already installed, check the version by running command:  `node --version`  
 Node version should be > 18 at the time of this file creation  
   
