@@ -11,6 +11,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
 var _Vehicle_internalId;
+Object.defineProperty(exports, "__esModule", { value: true });
 class Animal {
 }
 let tabbyCat = new Animal();
@@ -47,6 +48,30 @@ console.log("Class declaration (with constructor):");
 console.log(vehicle);
 console.log(vehicle.getVehicleModel());
 console.log();
+class AbstractExampleClass {
+    constructor(firstArg, secondArg) {
+        this.first = firstArg;
+        this.second = secondArg;
+    }
+    getFirstNumber() {
+        return this.first;
+    }
+}
+class InheritFromAbstract extends AbstractExampleClass {
+    constructor(firstArg, secondArg) {
+        super(firstArg, secondArg);
+    }
+    add() {
+        return this.first + this.second;
+    }
+    getSecondNumber() {
+        return this.second;
+    }
+}
+let AddMethodResult = new InheritFromAbstract(1, 2).add();
+let InheritExample1 = new InheritFromAbstract(1, 2).getFirstNumber();
+let InheritExample2 = new InheritFromAbstract(1, 2).getSecondNumber();
+console.log(`Call 'add' method from implemented abstract class - result: ${AddMethodResult}`);
 class Sedan extends Vehicle {
     constructor(internalId, externalId, model, type) {
         super(internalId, externalId, model, type);
@@ -66,3 +91,20 @@ tesla.SetType = "Fullsize Sports Sedan";
 console.log(tesla);
 console.log(`Number of sedans at dealership: ${Sedan.getDealershipInventoryCount()}`);
 console.log();
+function getMovieDetail() {
+    return { title: 'Jaws', release: new Date(1975, 5, 20) };
+}
+console.log(getMovieDetail());
+function getSomeThing(someType) {
+    console.log('getSomeThing argument:');
+    console.log(someType);
+    if (someType.title) {
+        return `Movie title is: ${someType.title}`;
+    }
+    if (someType.release) {
+        return `Movie title is: ${someType.release}`;
+    }
+    return 'Umm... something wrong.';
+}
+getSomeThing({ title: 'Jaw II' });
+getSomeThing({ release: new Date(1978, 5, 16) });

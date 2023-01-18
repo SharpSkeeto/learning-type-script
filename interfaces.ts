@@ -1,4 +1,7 @@
 /***** interfaces *****/
+// One major difference between type aliases vs interfaces
+// are that interfaces are open and type aliases are closed.
+
 
 // can make properties optional (nullable) by adding a ?
 interface Person {
@@ -43,4 +46,4 @@ export interface GetSubscriptionMember {
     GetSubscriptionMember(): SubscriptionMember
 }
 
-
+export { }

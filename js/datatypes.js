@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let thisString = "";
 let thisUpperCaseString = "";
 thisString = "This is a string";
@@ -15,22 +16,25 @@ console.log(`This ${thisNumber} plus ${parsedNumber} equals ${result}`);
 let hasValue = false;
 console.log(`This is the ${!hasValue} value`);
 let thisStringArray;
-let genericsNumberArray;
+let thisNumberArray;
 thisStringArray = ["one", "two", "three", "four", "five"];
-genericsNumberArray = [1, 2, 3, 4, 5];
+thisNumberArray = [1, 2, 3, 4, 5];
+thisStringArray.push("six");
+thisStringArray.pop();
+;
 console.log(`String array: ${thisStringArray}`);
 let foundSecondString = thisStringArray.find((num) => num === 'two');
 console.log(`The second value of the array is: ${foundSecondString}`);
-console.log(`Number array: ${genericsNumberArray}`);
-let foundThirdNumber = genericsNumberArray.find((num) => num === 3);
+console.log(`Number array: ${thisNumberArray}`);
+let foundThirdNumber = thisNumberArray.find((num) => num === 3);
 console.log(`The third value of the array is: ${foundThirdNumber}`);
-let sumOfNumbers = genericsNumberArray.reduce((total, current) => total + current);
+let sumOfNumbers = thisNumberArray.reduce((total, current) => total + current);
 console.log(`The sum of the array is: ${sumOfNumbers}`);
-let minNumber = Math.min(...genericsNumberArray);
+let minNumber = Math.min(...thisNumberArray);
 console.log(`The lowest number value of the array is: ${minNumber}`);
-let maxNumber = Math.max(...genericsNumberArray);
+let maxNumber = Math.max(...thisNumberArray);
 console.log(`The highest number value of the array is: ${maxNumber}`);
-let averageNumber = genericsNumberArray.reduce((total, current) => total + current) / genericsNumberArray.length;
+let averageNumber = thisNumberArray.reduce((total, current) => total + current) / thisNumberArray.length;
 console.log(`The average number value of the array is: ${averageNumber}`);
 let defaultExtension = 2;
 console.log(`Enum value (ts): ${defaultExtension}`);
@@ -84,26 +88,25 @@ class NotUnKnownUser {
         this.notName = 'Not John';
     }
 }
+const safeJSONParser = (json) => JSON.parse(json);
 let instanceOfUnKnownUser = new UnKnownUser();
 let unknownUserString = JSON.stringify(instanceOfUnKnownUser);
 let instanceOfNotUnKnownUser = new NotUnKnownUser();
 let notUnknownUserString = JSON.stringify(instanceOfNotUnKnownUser);
-const parsedUnKnownUserJSON = safeParse(unknownUserString);
-const parsedNotUnKnownUserJSON = safeParse(notUnknownUserString);
-let isUnKnownUserType = IsUserTypeUnKnownUser(parsedUnKnownUserJSON);
+const parsedUnKnownUserJSON = safeJSONParser(unknownUserString);
+const parsedNotUnKnownUserJSON = safeJSONParser(notUnknownUserString);
 console.log('UnKnownUser parsed JSON:');
 console.log(parsedUnKnownUserJSON);
 console.log('NotUnKnownUser parsed JSON:');
 console.log(parsedNotUnKnownUserJSON);
 checkUnKnownType(parsedUnKnownUserJSON);
 checkUnKnownType(parsedNotUnKnownUserJSON);
-function checkUnKnownType(someJSON) {
-    if (IsUserTypeUnKnownUser(someJSON)) {
-        console.log('Is type of UnKnownUser: true');
-        console.log(`UnKnownUser is: ${someJSON.name}`);
+function checkUnKnownType(json) {
+    if (IsUserTypeUnKnownUser(json)) {
+        console.log(`Is type of UnKnownUser: true, UnKnownUser is: ${json.name}`);
     }
     else {
-        console.log('Is type of UnKnownUser: false');
+        console.log('Is type of UnKnownUser: false, this is not the UnKnownUser class');
     }
 }
 function IsUserTypeUnKnownUser(object) {
@@ -111,26 +114,5 @@ function IsUserTypeUnKnownUser(object) {
         return "name" in object;
     }
     return false;
-}
-function safeParse(s) {
-    return JSON.parse(s);
-}
-function noop() {
-    return;
-}
-function f2() {
-    return true;
-}
-function IHaveFailed(failedMessage) {
-    throw new Error(failedMessage);
-}
-function fn(x) {
-    if (typeof x === "string") {
-    }
-    else if (typeof x === "number") {
-    }
-    else {
-        x;
-    }
 }
 console.log();

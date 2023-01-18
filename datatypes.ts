@@ -39,25 +39,30 @@ console.log(`This is the ${!hasValue} value`);
 /***** arrays *****/
 let thisStringArray: string[];
 // generics declaration
-let genericsNumberArray: Array<number>;
+let thisNumberArray: Array<number>;
 
 thisStringArray = ["one", "two", "three", "four", "five"];
-genericsNumberArray = [1, 2, 3, 4, 5];
+thisNumberArray = [1, 2, 3, 4, 5];
+
+// append to end of array, returns indexed number
+thisStringArray.push("six");
+// remove last element, returns typed value
+thisStringArray.pop();;
 
 console.log(`String array: ${thisStringArray}`);
 let foundSecondString = thisStringArray.find((num) => num === 'two');
 console.log(`The second value of the array is: ${foundSecondString}`);
 
-console.log(`Number array: ${genericsNumberArray}`);
-let foundThirdNumber = genericsNumberArray.find((num) => num === 3);
+console.log(`Number array: ${thisNumberArray}`);
+let foundThirdNumber = thisNumberArray.find((num) => num === 3);
 console.log(`The third value of the array is: ${foundThirdNumber}`);
-let sumOfNumbers = genericsNumberArray.reduce((total, current) => total + current);
+let sumOfNumbers = thisNumberArray.reduce((total, current) => total + current);
 console.log(`The sum of the array is: ${sumOfNumbers}`);
-let minNumber = Math.min(...genericsNumberArray);
+let minNumber = Math.min(...thisNumberArray);
 console.log(`The lowest number value of the array is: ${minNumber}`);
-let maxNumber = Math.max(...genericsNumberArray);
+let maxNumber = Math.max(...thisNumberArray);
 console.log(`The highest number value of the array is: ${maxNumber}`);
-let averageNumber = genericsNumberArray.reduce((total, current) => total + current) / genericsNumberArray.length;
+let averageNumber = thisNumberArray.reduce((total, current) => total + current) / thisNumberArray.length;
 console.log(`The average number value of the array is: ${averageNumber}`);
 
 /***** enums *****/
@@ -76,8 +81,6 @@ let defaultExtension: FileExtensions = FileExtensions.ts;
 console.log(`Enum value (ts): ${defaultExtension}`);
 let newExtensionValue = FileExtensions.js;
 console.log(`Enum value (js): ${newExtensionValue}`);
-
-
 
 /**** another way to handle enum type, non-number based *****/
 // types
@@ -127,7 +130,9 @@ console.log(`Swapped tuple 'any' values [10, 'twenty']: ${swappedAnyArgs}`);
 let swappedTypedArgs = swapTyped(10, 20);
 console.log(`Swapped tuple 'typed' values [10, 20]: ${swappedTypedArgs}`);
 
-// any (try to avoid), set the noImplicitAny flag to true in tsconfig to enforce.
+//***** any *****/
+// 'any' (try to avoid), set the noImplicitAny flag to true in tsconfig to enforce.
+// 'any' is not typed-checked and TypeScript can not infer from context
 let anyThing: any;
 anyThing = "Anything is acceptable!";
 console.log(anyThing);
@@ -136,7 +141,8 @@ console.log(`Yes, anything is acceptable: ${anyThing}`);
 
 
 /***** unknown *****/
-// This is similar to the 'any' type, but is safer because it’s not legal to do anything with an unknown value
+// Similar to the 'any' type, but is safer because it’s not legal to do anything with an unknown value
+// 'any' allows for ambiguity - 'unknown' requires specifics
 interface IUnKnownUser {
     name: string;
 }
@@ -150,15 +156,17 @@ class NotUnKnownUser implements INotUnKnownUser {
     notName: string = 'Not John';
 }
 
+// json Parser definition
 // Simulate API call with above dummy models
+const safeJSONParser = (json: string): unknown => JSON.parse(json);
+
 let instanceOfUnKnownUser = new UnKnownUser();
 let unknownUserString = JSON.stringify(instanceOfUnKnownUser);
 let instanceOfNotUnKnownUser = new NotUnKnownUser();
 let notUnknownUserString = JSON.stringify(instanceOfNotUnKnownUser);
-
-const parsedUnKnownUserJSON: unknown = safeParse(unknownUserString);
-const parsedNotUnKnownUserJSON: unknown = safeParse(notUnknownUserString);
-let isUnKnownUserType = IsUserTypeUnKnownUser(parsedUnKnownUserJSON);
+// json into a class model unknown type
+const parsedUnKnownUserJSON: unknown = safeJSONParser(unknownUserString);
+const parsedNotUnKnownUserJSON: unknown = safeJSONParser(notUnknownUserString);
 
 console.log('UnKnownUser parsed JSON:');
 console.log(parsedUnKnownUserJSON);
@@ -168,13 +176,12 @@ console.log(parsedNotUnKnownUserJSON);
 checkUnKnownType(parsedUnKnownUserJSON);
 checkUnKnownType(parsedNotUnKnownUserJSON);
 
-function checkUnKnownType(someJSON: unknown) {
-    if (IsUserTypeUnKnownUser(someJSON)) {
+function checkUnKnownType(json: unknown) {
+    if (IsUserTypeUnKnownUser(json)) {
         // can see properties of the 'unknown' type
-        console.log('Is type of UnKnownUser: true');
-        console.log(`UnKnownUser is: ${someJSON.name}`);
+        console.log(`Is type of UnKnownUser: true, UnKnownUser is: ${json.name}`);
     } else {
-        console.log('Is type of UnKnownUser: false');
+        console.log('Is type of UnKnownUser: false, this is not the UnKnownUser class');
     }
 }
 
@@ -188,43 +195,9 @@ function IsUserTypeUnKnownUser(object: unknown): object is IUnKnownUser {
     return false;
 }
 
-function safeParse(s: string): unknown {
-    return JSON.parse(s);
-}
-
-
-/***** void *****/
-// void represents the return value of functions which don’t return a value.
-// The inferred return type is void
-function noop() {
-    return;
-}
-
-// In TypeScript void is not the same as undefined
-// When a literal function definition has a void return type, that function must not return anything.
-function f2(): void {
-    // @ts-expect-error
-    return true;
-}
-
-
-/***** never *****/
-// Represents values which are never observed.
-function IHaveFailed(failedMessage: string): never {
-    throw new Error(failedMessage);
-}
-
-function fn(x: string | number): void {
-    if (typeof x === "string") {
-        // do something
-    } else if (typeof x === "number") {
-        // do something else
-    } else {
-        x; // has type 'never'!
-    }
-}
-
 console.log();
+
+export { }
 
 
 
