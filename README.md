@@ -1,10 +1,9 @@
-## Learning TypeScript from scratch with VSCode
+# Learning TypeScript from scratch with VSCode
 My notes learning TypeScript
   
 TypeScript documentation can be found [here](https://www.typescriptlang.org/docs).  
 TypeScript playground can be found [here](https://www.typescriptlang.org/play).  
   
-
 ### Commands shown using a powershell terminal
 ---
 Install the latest stable release of [Node.js](https://nodejs.org/en/download/)  
