@@ -1,4 +1,5 @@
 ## Learning TypeScript from scratch with VSCode
+My notes learning TypeScript
   
 TypeScript documentation can be found [here](https://www.typescriptlang.org/docs).  
 TypeScript playground can be found [here](https://www.typescriptlang.org/play).  
