@@ -31,8 +31,9 @@ Use defaults for now, but can change JavaScript target version and other configu
   
 Create a TypeScript file, Ex. TestTypeScript.ts  
 Add some basic JavaScript code as a test script  
-Example: `let fakeString = 'Fake String';  
-          console.log(fakeString);`  
+Example: 
+`let fakeString = 'Fake String';  
+ console.log(fakeString);`  
   
   
 Compile the script which will generate a TestTypeScript.js JavaScript file  
